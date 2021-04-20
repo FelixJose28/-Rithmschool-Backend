@@ -1,10 +1,38 @@
-﻿using System;
+﻿using Rithmschool.Core.Interfaces;
+using Rithmschool.Infrastructure.Data;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Rithmschool.Infrastructure.Repositories
 {
-    class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
+        private readonly RithmschoolContext _context;
+        public ITeacherRepository teacherRepository { get; }
+        public UnitOfWork(RithmschoolContext context)
+        {
+            _context = context;
+            teacherRepository = new TeacherRepository(_context);
+        }
+
+
+
+        public void Commit()
+        {
+            _context.SaveChanges();
+        }
+
+        public async Task CommitAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
+
     }
 }
