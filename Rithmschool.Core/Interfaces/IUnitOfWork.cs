@@ -8,6 +8,7 @@ namespace Rithmschool.Core.Interfaces
     public interface IUnitOfWork: IDisposable
     {
         ITeacherRepository teacherRepository { get; }
+        IBuyRepository buyRepository { get; }
         Task CommitAsync();
 
         void Commit();
