@@ -13,12 +13,14 @@ namespace Rithmschool.Infrastructure.Repositories
         public ITeacherRepository teacherRepository { get; }
         public IBuyRepository buyRepository { get; }
         public IUserRepository userRepository { get; }
+        public ICourseRepository courseRepository { get; }
         public UnitOfWork(RithmschoolContext context)
         {
             _context = context;
             teacherRepository = new TeacherRepository(_context);
             buyRepository = new BuyRepository(_context);
             userRepository = new UserRepository(_context);
+            courseRepository = new CourseRepository(_context);
         }
 
 

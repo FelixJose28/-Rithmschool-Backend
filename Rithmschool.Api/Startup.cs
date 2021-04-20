@@ -40,6 +40,7 @@ namespace Rithmschool.Api
             services.AddTransient<ITeacherRepository, TeacherRepository>();
             services.AddTransient<IBuyRepository, BuyRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICourseRepository, CourseRepository>();
 
             services.AddDbContext<RithmschoolContext>(options => 
             {
