@@ -5,16 +5,10 @@ using System.Collections.Generic;
 
 namespace Rithmschool.Core.DTOs
 {
-    public partial class Role
+    public partial class RoleDTO
     {
-        public Role()
-        {
-            Users = new HashSet<User>();
-        }
-
         public int RoleId { get; set; }
         public string Name { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
     }
 }

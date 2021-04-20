@@ -5,13 +5,10 @@ using System.Collections.Generic;
 
 namespace Rithmschool.Core.DTOs
 {
-    public partial class Buy
+    public partial class BuyDTO
     {
         public int BuyId { get; set; }
         public int UserId { get; set; }
         public int CourseId { get; set; }
-
-        public virtual Course Course { get; set; }
-        public virtual User User { get; set; }
     }
 }
