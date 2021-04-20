@@ -12,11 +12,13 @@ namespace Rithmschool.Infrastructure.Repositories
         private readonly RithmschoolContext _context;
         public ITeacherRepository teacherRepository { get; }
         public IBuyRepository buyRepository { get; }
+        public IUserRepository userRepository { get; }
         public UnitOfWork(RithmschoolContext context)
         {
             _context = context;
             teacherRepository = new TeacherRepository(_context);
             buyRepository = new BuyRepository(_context);
+            userRepository = new UserRepository(_context);
         }
 
 
