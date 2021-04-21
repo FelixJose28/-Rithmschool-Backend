@@ -36,11 +36,14 @@ namespace Rithmschool.Api
 
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+
             services.AddTransient<ITeacherRepository, TeacherRepository>();
             services.AddTransient<IBuyRepository, BuyRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICourseRepository, CourseRepository>();
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContext<RithmschoolContext>(options => 
             {

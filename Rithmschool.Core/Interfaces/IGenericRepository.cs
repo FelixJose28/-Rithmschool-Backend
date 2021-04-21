@@ -11,6 +11,6 @@ namespace Rithmschool.Core.Interfaces
         Task<T> Update(T entity);
         Task<T> Remove(int id);
         Task<T> GetById(int id);
-        Task<IEnumerable<T>> GetAll();  
+        IEnumerable<T> GetAll();  
     }
 }

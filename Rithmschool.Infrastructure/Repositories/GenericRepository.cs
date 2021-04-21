@@ -3,6 +3,7 @@ using Rithmschool.Core.Interfaces;
 using Rithmschool.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,9 +18,9 @@ namespace Rithmschool.Infrastructure.Repositories
             _context = context;
             _dbSetEntities = _context.Set<T>();
         }
-        public async Task<IEnumerable<T>> GetAll()
+        public IEnumerable<T> GetAll()
         {
-            return await _dbSetEntities.ToListAsync();
+            return _dbSetEntities.AsEnumerable();
         }
         public async Task<T> GetById(int id)
         {
