@@ -47,7 +47,7 @@ namespace Rithmschool.Api.Controllers
             var teacher = await _unitOfWork.teacherRepository.GetById(id);
             if (teacher == null)
             {
-                return NotFound("Not course");
+                return NotFound("Not teacher");
             }
             var courseDto = _mapper.Map<TeacherDTO>(teacher);
             return Ok(courseDto);
