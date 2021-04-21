@@ -39,7 +39,7 @@ namespace Rithmschool.Api.Controllers
         }
 
 
-        [HttpGet(nameof(GetTeacher) + "{id}")]
+        [HttpGet(nameof(GetTeacher) + "/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetTeacher(int id)
