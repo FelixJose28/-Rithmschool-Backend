@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rithmschool.Core.DTOs;
 using Rithmschool.Core.Entities;
-using Rithmschool.Infrastructure.Repositories;
+using Rithmschool.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +13,11 @@ namespace Rithmschool.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Courses : ControllerBase
+    public class CourseController : ControllerBase
     {
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public Courses(UnitOfWork unitOfWork, IMapper mapper )
+        public CourseController(IUnitOfWork unitOfWork, IMapper mapper )
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -33,7 +33,7 @@ namespace Rithmschool.Api.Controllers
             {
                 return NotFound("Not courses");
             }
-            var coursesDto = _mapper.Map<CourseDTO>(courses);
+            var coursesDto = _mapper.Map<IEnumerable<CourseDTO>>(courses);
             return Ok(coursesDto);
         }
 
