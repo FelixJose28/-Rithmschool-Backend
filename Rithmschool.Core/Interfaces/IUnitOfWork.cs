@@ -9,7 +9,7 @@ namespace Rithmschool.Core.Interfaces
     {
         ITeacherRepository teacherRepository { get; }
         IBuyRepository buyRepository { get; }
-        IUserRepository userRepository { get; }
+        IAuthenticationRepository authenticationRepository { get; }
         ICourseRepository courseRepository { get; }
         Task CommitAsync();
 

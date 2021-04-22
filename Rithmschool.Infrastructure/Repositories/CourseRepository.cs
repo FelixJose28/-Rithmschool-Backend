@@ -12,7 +12,7 @@ namespace Rithmschool.Infrastructure.Repositories
         private readonly RithmschoolContext _context;
         public CourseRepository(RithmschoolContext context):base(context)
         {
-
+            _context = context;
         }
     }
 }
