@@ -4,6 +4,7 @@ using Rithmschool.Core.Interfaces;
 using Rithmschool.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,5 +28,11 @@ namespace Rithmschool.Infrastructure.Repositories
             User userR = await _context.Users.FirstOrDefaultAsync(x => x.Email == user.Email);
             return userR;
         }
+        public async Task<User> GetUserByEmail(string user)
+        {
+            var userFind = await _context.Users.Where(x => x.Email == user).SingleOrDefaultAsync();
+            return userFind;
+        }
+
     }
 }

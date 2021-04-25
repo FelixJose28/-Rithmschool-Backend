@@ -10,5 +10,6 @@ namespace Rithmschool.Core.Interfaces
     {
         Task<User> Loggin(UserLoginCustom usuario);
         Task<User> ValidateEmail(User usuario);
+        Task<User> GetUserByEmail(string user);
     }
 }

@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Rithmschool.Infrastructure\Rithmschool.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="archivos\" />
+  </ItemGroup>
+
 </Project>

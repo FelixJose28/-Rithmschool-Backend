@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rithmschool.Core.DTOs;
@@ -6,6 +7,7 @@ using Rithmschool.Core.Entities;
 using Rithmschool.Core.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,10 +19,12 @@ namespace Rithmschool.Api.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public CourseController(IUnitOfWork unitOfWork, IMapper mapper )
+        private readonly IWebHostEnvironment _enviroment;
+        public CourseController(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment enviroment)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _enviroment = enviroment;
         }
 
         [HttpGet(nameof(GetCourses))]
@@ -52,14 +56,27 @@ namespace Rithmschool.Api.Controllers
             return Ok(courseDto);
         }
 
-        [HttpPost(nameof(PostCourse))]
+        [HttpPost(nameof(CreateCourse))]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> PostCourse(CourseDTO courseDTO)
+        public async Task<IActionResult> CreateCourse([FromForm]CourseDTO courseDTO)
         {
-            var course = _mapper.Map<Course>(courseDTO);
+            var upload = courseDTO.File;
+            var course = new Course();
+            course.CourseId = 0;
+            course.Title = courseDTO.Title;
+            course.Route = courseDTO.Route;
+            course.Duration = courseDTO.Duration;
+            course.Price = courseDTO.Price;
+            course.TeacherId = courseDTO.TeacherId;
+
+            var fileName = Path.Combine(_enviroment.ContentRootPath, "archivos", upload.FileName);
+            await upload.CopyToAsync(new FileStream(fileName, FileMode.Create));
+
+            course.Route = upload.FileName;
             await _unitOfWork.courseRepository.Add(course);
             await _unitOfWork.CommitAsync();
             return Ok(courseDTO);
+
         }
 
         [HttpDelete(nameof(RemoveCourse)+"/{id}")]

@@ -59,6 +59,25 @@ namespace Rithmschool.Api.Controllers
             return Ok(userDTO);
         }
 
+
+
+        [HttpGet(nameof(GetUserByEmail) + "/{user}")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetUserByEmail(string user)
+        {
+            var userFind = await _unitOfWork.authenticationRepository.GetUserByEmail(user);
+            if (userFind == null)
+            {
+                return NotFound("User not found");
+            }
+            var userDto = _mapper.Map<UserDTO>(userFind);
+            return Ok(userDto);
+
+        }
+
+
         [HttpPost(nameof(RegisterUser))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> RegisterUser(UserDTO userDTO)

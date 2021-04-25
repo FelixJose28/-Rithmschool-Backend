@@ -59,6 +59,15 @@ namespace Rithmschool.Infrastructure.Data
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Route)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("route");
+
+
+                entity.Property(e => e.File)
+                .HasColumnName("file");
+
                 entity.HasOne(d => d.Teacher)
                     .WithMany(p => p.Courses)
                     .HasForeignKey(d => d.TeacherId)
